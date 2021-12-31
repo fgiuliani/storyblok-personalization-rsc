@@ -1,7 +1,7 @@
-import ContentVariant from "./ContentVariant.server";
-import { sbEditable } from "@storyblok/storyblok-editable";
 import { Suspense } from "react";
 import Cookies from "js-cookie";
+import { sbEditable } from "@storyblok/storyblok-editable";
+import ContentVariant from "./ContentVariant.server";
 
 const PersonalizedContent = ({ blok }) => (
   <div {...sbEditable(blok)} key={blok._uid}>

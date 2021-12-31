@@ -8,13 +8,8 @@ export default function CatalogPage({ props }) {
 export async function getServerSideProps(context) {
   const { slug } = context.query;
 
-  let sbParams = {
-    version: "draft", // or "published"
-  };
-
   let { data } = await Storyblok.get(
-    `cdn/stories?starts_with=products/&${slug}`,
-    sbParams
+    `cdn/stories?starts_with=products/&${slug}`
   );
 
   return {

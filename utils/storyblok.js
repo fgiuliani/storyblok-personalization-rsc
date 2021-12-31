@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import StoryblokClient from "storyblok-js-client";
 
-const Storyblok = new StoryblokClient({
-  accessToken: "AK2gOnJ2NjAyx1nhomncXwtt",
-  cache: {
-    clear: "auto",
-    type: "memory",
+const Storyblok = {
+  get: async (url) => {
+    const res = await fetch(
+      `https://api.storyblok.com/v2/${url}?version=draft&token=AK2gOnJ2NjAyx1nhomncXwtt`
+    );
+
+    const data = await res.json();
+    return { data };
   },
-});
+};
 
 export function useStoryblok(originalStory, preview) {
   let [story, setStory] = useState(originalStory);
@@ -28,9 +30,7 @@ export function useStoryblok(originalStory, preview) {
       });
 
       storyblokInstance.on("enterEditmode", (event) => {
-        Storyblok.get(`cdn/stories/${event.storyId}`, {
-          version: "draft",
-        })
+        Storyblok.get(`cdn/stories/${event.storyId}`)
           .then(({ data }) => {
             if (data.story) {
               setStory(data.story);

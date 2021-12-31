@@ -11,17 +11,7 @@ export default function Home({ story }) {
 }
 
 export async function getServerSideProps() {
-  let slug = "home";
-
-  let sbParams = {
-    version: "draft", // or "published"
-  };
-
-  try {
-    let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
-  } catch (error) {
-    console.log(error);
-  }
+  let { data } = await Storyblok.get("cdn/stories/home");
 
   return {
     props: {
