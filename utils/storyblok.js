@@ -45,6 +45,7 @@ export function useStoryblok(originalStory, preview) {
 
   function addBridge(callback) {
     const existingScript = document.getElementById("storyblokBridge");
+
     if (!existingScript) {
       const script = document.createElement("script");
       script.src = "//app.storyblok.com/f/storyblok-v2-latest.js";
